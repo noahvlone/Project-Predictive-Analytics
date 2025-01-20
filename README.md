@@ -77,7 +77,8 @@ melakukan modeling dengan membandingkan 3 algoritma yaitu k-nearest neighbors, r
 ## Evaluation
 evaluasi metrik yang digunakan adalah mean squared error(MSE) digunakan untuk memberikan penalti lebih besar pada kesalahan yang besar. Saat menghitung nilai Mean Squared Error pada data train dan test, kita membaginya dengan nilai 1e2 untuk menghindari skala yang terlalu besar.
 
-- hasil evaluasi berdasarkan metrik yang digunakan:
+hasil evaluasi berdasarkan metrik yang digunakan:
+
 KNN (K-Nearest Neighbors):
 Train MSE: 55.87
 Test MSE: 64.15
