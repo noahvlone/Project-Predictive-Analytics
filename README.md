@@ -94,7 +94,8 @@ Train MSE: 35.69
 Test MSE: 41.58
 Boosting menunjukkan performa yang lebih seimbang antara data training dan testing dibandingkan dengan model lainnya. Meskipun nilai MSE-nya tidak serendah Random Forest pada test data, kesenjangan antara train dan test lebih kecil, menunjukkan bahwa Boosting mungkin lebih generalizable.
 
-- Kesimpulan
+Kesimpulan
+
 KNN: Kurang cocok untuk dataset ini karena performa kurang baik (MSE tinggi) dan potensi overfitting.
 RF: Memiliki performa sangat baik pada training.
 Boosting: Memberikan keseimbangan terbaik antara train dan test, menjadikannya pilihan terbaik jika tujuan untuk generalisasi yang baik ke data baru.
