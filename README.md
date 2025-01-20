@@ -14,14 +14,14 @@ Supermarket ini ingin memanfaatkan data transaksi historis untuk meningkatkan ki
 ### Problem Statements
 
 Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1: Bagaimana supermarket dapat memprediksi total pendapatan harian berdasarkan data historis transaksi?
-- Pernyataan Masalah 2: Bagaimana supermarket dapat memprediksi tingkat kepuasan pelanggan berdasarkan faktor seperti jumlah belanja, metode pembayaran, dan jenis produk yang dibeli?
+- Pernyataan Masalah 1: Rantai supermarket ingin memahami pola dan tren dalam data penjualan mereka untuk meningkatkan proses pengambilan keputusan. Namun, mereka menghadapi tantangan dalam mengidentifikasi prediktor signifikan terhadap kinerja penjualan serta outlier dalam dataset mereka. Ketidakhadiran proses prapengolahan data dan rekayasa fitur yang memadai menyebabkan wawasan dan prediksi yang kurang optimal.
+- Pernyataan Masalah 2: Supermarket ingin menerapkan model prediktif untuk memprediksi kinerja penjualan, tetapi belum yakin tentang akurasi dan efisiensi dari berbagai algoritma pembelajaran mesin. Mereka memerlukan evaluasi komprehensif terhadap model seperti KNN, Random Forest, dan Boosting untuk menentukan pendekatan yang paling efektif dalam meminimalkan kesalahan.
 
 ### Goals
 
 Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1: Supermarket perlu mengetahui pola transaksi harian untuk memprediksi pendapatan masa depan, sehingga manajemen dapat mengoptimalkan inventaris dan sumber daya dengan lebih baik.
-- Jawaban pernyataan masalah 2: Memahami faktor-faktor yang memengaruhi kepuasan pelanggan membantu supermarket dalam menciptakan pengalaman belanja yang lebih baik dan meningkatkan retensi pelanggan.
+- Jawaban pernyataan masalah 1: Mengembangkan pipeline analitik prediktif secara menyeluruh yang mencakup pembersihan data, analisis data eksploratori (EDA), dan prapengolahan fitur. Menggunakan teknik statistik dan pembelajaran mesin untuk mendeteksi outlier dan mengidentifikasi faktor kunci yang memengaruhi penjualan.
+- Jawaban pernyataan masalah 2: Membandingkan kinerja berbagai algoritma pembelajaran mesin dengan menggunakan Mean Squared Error (MSE) sebagai metrik evaluasi. Mengoptimalkan model untuk mengidentifikasi model yang memberikan keseimbangan terbaik antara akurasi pelatihan dan generalisasi pada data yang belum pernah dilihat.
 
 
 ## Data Understanding
@@ -75,15 +75,26 @@ melakukan modeling dengan membandingkan 3 algoritma yaitu k-nearest neighbors, r
 
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+evaluasi metrik yang digunakan adalah mean squared error(MSE) digunakan untuk memberikan penalti lebih besar pada kesalahan yang besar. Saat menghitung nilai Mean Squared Error pada data train dan test, kita membaginya dengan nilai 1e2 untuk menghindari skala yang terlalu besar.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+- hasil evaluasi berdasarkan metrik yang digunakan:
+KNN (K-Nearest Neighbors):
+Train MSE: 55.87
+Test MSE: 64.15
+Hasil ini menunjukkan bahwa model KNN memiliki kesalahan kuadrat rata-rata yang cukup besar, baik pada data train maupun test. Selain itu, perbedaan antara train dan test cukup signifikan, menunjukkan potensi overfitting. Model bekerja lebih baik pada data training daripada data testing.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+RF (Random Forest):
+Train MSE: 0.14
+Test MSE: 0.85
+Random Forest menunjukkan performa yang sangat baik pada data training, dengan MSE mendekati nol. Namun, pada data test, meskipun performanya masih relatif baik (MSE rendah), selisih antara train dan test cukup besar. Hal ini menunjukkan kemungkinan overfitting, di mana model terlalu "menghafal" data training.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Boosting (AdaBoost):
+Train MSE: 35.69
+Test MSE: 41.58
+Boosting menunjukkan performa yang lebih seimbang antara data training dan testing dibandingkan dengan model lainnya. Meskipun nilai MSE-nya tidak serendah Random Forest pada test data, kesenjangan antara train dan test lebih kecil, menunjukkan bahwa Boosting mungkin lebih generalizable.
 
-**---Ini adalah bagian akhir laporan---**
+- Kesimpulan
+KNN: Kurang cocok untuk dataset ini karena performa kurang baik (MSE tinggi) dan potensi overfitting.
+RF: Memiliki performa sangat baik pada training.
+Boosting: Memberikan keseimbangan terbaik antara train dan test, menjadikannya pilihan terbaik jika tujuan untuk generalisasi yang baik ke data baru.
+
