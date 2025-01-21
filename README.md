@@ -53,7 +53,7 @@ Variabel Dataset:
 ## Explorarory Data Analysis 
 - EDA Univariate tiap Fitur dengan Barplot dan Histogram Hasil Analisis:
   
-  untuk fitur kategorical:
+  untuk fitur kategorikal:
   1. cabang supermarket yang paling banyak pembelinya adalah cabang supermarket A diikuti cabang B dan C.
   2. distribusi kota dengan penjualan yang paling besar terletak di kota Yangon lalu kota Mandalay pada urutan kedua dan kota Naypyitaw urutan ketiga.
   3. customer dengan tipe member/langganan sedikit lebih unggul dibandingkan dengan customer non member/normal, Customer supermarket paling banyak adalah Female/Perempuan.
