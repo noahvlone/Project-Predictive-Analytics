@@ -2,53 +2,56 @@
 
 ## Domain Proyek
 
-Proyek ini berfokus pada analisis data transaksi di industri retail, khususnya di sektor supermarket. Supermarket beroperasi dalam lingkungan bisnis yang sangat kompetitif, di mana pengelolaan data transaksi pelanggan adalah kunci untuk memahami pola pembelian, preferensi pelanggan, dan faktor yang memengaruhi kepuasan mereka.
+Proyek ini berfokus pada analisis data transaksi di industri retail, khususnya pada sektor supermarket. Dalam lingkungan bisnis yang sangat kompetitif, pengelolaan data transaksi pelanggan menjadi kunci untuk memahami pola pembelian, preferensi pelanggan, serta faktor yang memengaruhi kepuasan pelanggan.
+
+Urgensi proyek ini adalah untuk memberikan wawasan yang mendalam mengenai tren penjualan dan preferensi pelanggan, serta mendukung pengambilan keputusan strategis berbasis data. Solusi yang diusulkan mencakup implementasi model prediksi berbasis machine learning untuk meningkatkan efisiensi operasional dan kepuasan pelanggan.
 
   Format Referensi: [Sales of Supermarket](https://www.kaggle.com/datasets/lovishbansal123/sales-of-a-supermarket) 
 
 ## Business Understanding
 
-Supermarket ini ingin memanfaatkan data transaksi historis untuk meningkatkan kinerja bisnis, baik dalam hal optimalisasi pendapatan maupun pemahaman kepuasan pelanggan. Berdasarkan data transaksi yang berisi informasi tentang pelanggan, produk, metode pembayaran, dan ulasan pelanggan, terdapat dua area fokus utama untuk pengambilan keputusan strategis.
+Supermarket ini ingin memanfaatkan data transaksi historis untuk meningkatkan kepuasan pelanggan dengan memahami pola pembelian dan preferensi mereka. Selain itu, supermarket berupaya memprediksi penjualan di masa depan untuk mendukung pengelolaan inventori yang lebih optimal dan strategi pemasaran yang efektif. Berdasarkan data transaksi yang mencakup informasi tentang pelanggan, produk, metode pembayaran, dan ulasan pelanggan, pengambilan keputusan strategis difokuskan pada peningkatan personalisasi layanan dan pengoptimalan pengelolaan inventori untuk mendukung pertumbuhan bisnis.
 
 
 ### Problem Statements
 
 Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1: Rantai supermarket ingin memahami pola dan tren dalam data penjualan mereka untuk meningkatkan proses pengambilan keputusan. Namun, mereka menghadapi tantangan dalam mengidentifikasi prediktor signifikan terhadap kinerja penjualan serta outlier dalam dataset mereka. Ketidakhadiran proses prapengolahan data dan rekayasa fitur yang memadai menyebabkan wawasan dan prediksi yang kurang optimal.
-- Pernyataan Masalah 2: Supermarket ingin menerapkan model prediktif untuk memprediksi kinerja penjualan, tetapi belum yakin tentang akurasi dan efisiensi dari berbagai algoritma pembelajaran mesin. Mereka memerlukan evaluasi komprehensif terhadap model seperti KNN, Random Forest, dan Boosting untuk menentukan pendekatan yang paling efektif dalam meminimalkan kesalahan.
+- Pernyataan Masalah 1: Bagaimana supermarket dapat meningkatkan kepuasan pelanggan dengan memahami pola pembelian dan preferensi mereka berdasarkan data historis?.
+- Pernyataan Masalah 2: Bagaimana memprediksi penjualan di masa depan untuk membantu supermarket mengoptimalkan pengelolaan inventori dan strategi pemasaran?.
 
 ### Goals
 
 Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1: Mengembangkan pipeline analitik prediktif secara menyeluruh yang mencakup pembersihan data, analisis data eksploratori (EDA), dan prapengolahan fitur. Menggunakan teknik statistik dan pembelajaran mesin untuk mendeteksi outlier dan mengidentifikasi faktor kunci yang memengaruhi penjualan.
-- Jawaban pernyataan masalah 2: Membandingkan kinerja berbagai algoritma pembelajaran mesin dengan menggunakan Mean Squared Error (MSE) sebagai metrik evaluasi. Mengoptimalkan model untuk mengidentifikasi model yang memberikan keseimbangan terbaik antara akurasi pelatihan dan generalisasi pada data yang belum pernah dilihat.
+- Jawaban pernyataan masalah 1: Menggunakan analitik berbasis data untuk memberikan wawasan tentang pola pembelian pelanggan, yang dapat digunakan untuk merancang promosi yang lebih efektif dan personalisasi layanan.
+- Jawaban pernyataan masalah 2: Membantu supermarket dalam merencanakan strategi bisnis berbasis prediksi penjualan yang akurat untuk mengoptimalkan pengelolaan inventori, meningkatkan pendapatan, dan mengurangi risiko kekurangan atau kelebihan stok.
 
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. [Kaggle](https://www.kaggle.com/datasets/lovishbansal123/sales-of-a-supermarket).
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Dataset terdiri dari 1000 baris dan 12 kolom. Informasi data meliputi fitur seperti cabang supermarket, jenis pelanggan, kategori produk, metode pembayaran, dan penilaian pelanggan. Sumber atau tautan untuk mengunduh dataset. [Kaggle](https://www.kaggle.com/datasets/lovishbansal123/sales-of-a-supermarket).
 
-### Variabel-variabel pada dataset adalah sebagai berikut:
+Kondisi Data:
+- Tidak ditemukan missing values atau data duplikat.
+- Data numerik perlu distandarisasi, dan fitur kategori perlu diencoding.
+  
+Variabel Dataset:
 - Branch: Cabang supermarket (kategori: A, B, C).
 - City: Kota lokasi supermarket (kategori: Yangon, Naypyitaw, Mandalay).
 - Customer type: Jenis pelanggan (Member atau Normal).
 - Gender: Jenis kelamin pelanggan (Male atau Female).
-- Product line: Kategori produk (Health and beauty, Electronic accessories, dll.).
-- Unit price: Harga per unit produk (numerik).
+- Product line: Kategori produk.
+- Unit price: Harga per unit (numerik).
 - Quantity: Jumlah unit yang dibeli (numerik).
-- Tax 5%: Pajak 5% dari total harga (numerik).
-- Total: Total nilai transaksi (numerik).
-- Date: Tanggal transaksi (datetime dalam format teks).
-- Payment: Metode pembayaran (Cash, Credit card, Ewallet).
-- Rating: Penilaian pelanggan (skala 1-10).
+- Tax 5%: Pajak dari total harga (numerik).
+- Total: Nilai total transaksi (numerik).
+- Date: Tanggal transaksi (datetime).
+- Payment: Metode pembayaran.
+- Rating: Penilaian pelanggan.
 
-  Note: saya menghapus beberapa column dari dataset aslinya karna column tersebut tidak diperlukan untuk analisis model saya
+  Note: beberapa column dari dataset aslinya dihapus karna column tersebut tidak diperlukan untuk analisis model
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, teknik visualisasi data atau exploratory data analysis, yang saya gunakan dalam notebook adalah EDA univariate dan EDA multivariate
-- saya menggunakan visualisasi menggunakan bar chart, histogram dan boxplot pada tiap-tiap fitur
-- saya membuat analysis data multivariate dengan membandingkan tiap fitur yang ada, dengan perbandingan multivariate categorical features vs target, lalu analisis multivariate numerical features menggunakan visualisasi boxplot, heatmap dan pairplot.
+## Explorarory Data Analysis 
+
 
 ## Data Preparation
 Pada bagian ini saya menerapkan beberapa teknik preparation data yang terdiri dari sebagai berikut:
