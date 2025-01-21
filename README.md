@@ -51,7 +51,31 @@ Variabel Dataset:
   Note: beberapa column dari dataset aslinya dihapus karna column tersebut tidak diperlukan untuk analisis model
 
 ## Explorarory Data Analysis 
+- EDA Univariate tiap Fitur dengan Barplot dan Histogram Hasil Analisis:
+  
+  untuk fitur kategorical:
+  1. cabang supermarket yang paling banyak pembelinya adalah cabang supermarket A diikuti cabang B dan C.
+  2. distribusi kota dengan penjualan yang paling besar terletak di kota Yangon lalu kota Mandalay pada urutan kedua dan kota Naypyitaw urutan ketiga.
+  3. customer dengan tipe member/langganan sedikit lebih unggul dibandingkan dengan customer non member/normal, Customer supermarket paling banyak adalah Female/Perempuan.
+  4. jenis kategori produk yang paling diminati adalah Fashion accessories, Food and beverages, dan Electronic accessories,
+  5. metode pembayaran paling banyak digunakan customer adalah E-wallet karna praktis.
 
+  untuk fitur numerikal:
+  1. harga barang disupermarket yang paling banyak dibeli adalah barang dengan range harga 30-75 dollar,
+  2. rata-rata jumlah barang/quantity yang dibeli disupermarket adalah 5 barang,
+  3. rata-rata pajak pembelian berjumlah 15 dollar per customer,
+  4. rata-rata total pembelian produk disupermarket berkisar 322.2 dollar per customer, pembelian total terkecil 10.6 dollar, dan pembelian total terbesar 1042 dollar, dan
+  5. rating rata-rata dari supermarket tersebut adalah 6.9.
+  
+- EDA Multivariate tiap fitur dengan Boxplot, Pairplot, dan Heatmap, berikut hasil yang didapatkan:
+  1. Insight Total vs Branch: Cabang C memiliki performa yang paling tinggi dalam hal nilai rata-rata dan distribusi transaksi total dibandingkan cabang lainnya. Namun, variasi di cabang ini juga yang paling besar. Jika fokus pada stabilitas, cabang A menunjukkan performa dengan variasi yang lebih kecil.
+  2. Insight Total vs City: Kota Naypyitaw menunjukkan performa tertinggi dalam hal rata-rata transaksi dan nilai transaksi maksimum, namun juga memiliki variasi yang paling besar. Kota Yangon memiliki nilai transaksi yang lebih konsisten dibandingkan kota lainnya. Analisis ini dapat digunakan untuk strategi bisnis yang lebih spesifik, seperti personalisasi layanan di Naypyitaw untuk transaksi bernilai tinggi dan stabilitas operasional di Yangon.
+  3. Insight Total vs Customer type: Pelanggan Member cenderung memiliki nilai transaksi rata-rata yang sedikit lebih tinggi dibandingkan pelanggan Normal, dengan distribusi transaksi yang hampir sama secara statistik. Hal ini menunjukkan adanya kecenderungan bahwa pelanggan Member mungkin memiliki preferensi atau pola belanja yang lebih besar dibandingkan pelanggan Normal.
+  4. Insight Total vs Gender: Pelanggan Female cenderung memiliki nilai transaksi rata-rata yang lebih tinggi dibandingkan pelanggan Male pada semua persentil (25%, 50%, dan 75%). Meskipun nilai maksimum antara Female dan Male hampir sama, nilai transaksi pelanggan Female menunjukkan kecenderungan lebih tinggi secara keseluruhan. Hal ini mungkin mengindikasikan bahwa pelanggan Female memiliki daya beli atau preferensi belanja yang lebih besar.
+  5. Insight Total vs Product line: Home and lifestyle adalah lini produk dengan rata-rata dan median transaksi tertinggi, menunjukkan popularitas atau nilai produk yang lebih tinggi dibanding kategori lain. Fashion accessories memiliki nilai transaksi rata-rata dan median yang lebih rendah, meskipun memiliki nilai maksimum tertinggi. Ini menunjukkan adanya beberapa transaksi besar yang meningkatkan maksimum, tetapi secara keseluruhan transaksi di kategori ini cenderung lebih kecil. Sports and travel dan Food and beverages menunjukkan distribusi nilai transaksi yang relatif merata, dengan rata-rata yang berada di tengah-tengah kategori lainnya.
+  6. Insight Total vs Payment: Transaksi dengan uang tunai (Cash) menunjukkan nilai rata-rata dan median yang lebih tinggi, mengindikasikan bahwa metode ini digunakan lebih sering untuk transaksi dengan jumlah menengah ke atas. Transaksi dengan Ewallet menunjukkan konsistensi (penyebaran lebih kecil), sedangkan kartu kredit memiliki variasi transaksi yang lebih besar. Metode pembayaran berbeda memiliki keunikan masing-masing dalam pola transaksi.
+  7. Insight Pairplot: Total transaksi terutama dipengaruhi oleh Unit Price dan Quantity. Pajak 5% sepenuhnya linier terhadap total belanja. Rating tampaknya tidak berkorelasi dengan variabel-variabel lainnya. Data menunjukkan distribusi yang masuk akal, dengan beberapa pola hubungan yang diharapkan, terutama antara total dan variabel lainnya seperti harga satuan, jumlah barang, dan pajak.
+  8. Insight Heatmap: Total belanja dipengaruhi terutama oleh Unit Price dan Quantity, serta secara langsung oleh Tax 5%. Rating tidak memiliki hubungan signifikan dengan variabel lainnya, mengindikasikan bahwa kepuasan pelanggan tidak berkaitan dengan aspek finansial dalam data ini. Pajak 5% hanya bertindak sebagai komponen langsung dari total belanja tanpa hubungan independen lainnya.
 
 ## Data Preparation
 Pada bagian ini saya menerapkan beberapa teknik preparation data yang terdiri dari sebagai berikut:
