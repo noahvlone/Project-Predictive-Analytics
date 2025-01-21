@@ -78,17 +78,24 @@ Variabel Dataset:
   8. Insight Heatmap: Total belanja dipengaruhi terutama oleh Unit Price dan Quantity, serta secara langsung oleh Tax 5%. Rating tidak memiliki hubungan signifikan dengan variabel lainnya, mengindikasikan bahwa kepuasan pelanggan tidak berkaitan dengan aspek finansial dalam data ini. Pajak 5% hanya bertindak sebagai komponen langsung dari total belanja tanpa hubungan independen lainnya.
 
 ## Data Preparation
-Pada bagian ini saya menerapkan beberapa teknik preparation data yang terdiri dari sebagai berikut:
+Menerapkan beberapa teknik preparation data yang terdiri dari sebagai berikut:
+- Mengecek Duplicate Data
+- Mengecek Missing Values Data
+- Mengubah Tipe Data kolom Date menjadi datetime
 - Encoding fitur kategorikal
 - Mereduksi dimensi menggunakan Principal Component Analysis (PCA)
 - Membagi dataset yang akan digunakan pada proses model development menjadi train dan test menggunakan fungsi train_test_split dari library scikit-learn saya membaginya menjadi 80% train 20% test
 - Melakukan Standarisasi untuk fitur numerikal menggunakan StandardScaler.
+- Menghapus Kolom Date karna tidak diperlukan untuk modeling
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- encoding fitur kategorikal saya gunakan untuk merubah isi data kategorikal menjadi numerikal menggunakan fungsi get_dummies, tujuannya untuk merepresentasikan kategori sebagai variabel biner, menghilangkan ambiguitas, meningkatkan kinerja model, dan menghindari bias dari model.
+Penjelasan Tahap yang dilakukan sesuai Notebook: 
+- Mengecek duplikasi data menggunakan fungsi duplicated().sum()
+- Mengecek missing value data menggunakan fungsi isnull().sum()
+- Encoding fitur kategorikal saya gunakan untuk merubah isi data kategorikal menjadi numerikal menggunakan fungsi get_dummies, tujuannya untuk merepresentasikan kategori sebagai variabel biner, menghilangkan ambiguitas, meningkatkan kinerja model, dan menghindari bias dari model.
 - Reduksi menggunakan PCA digunakan karna untuk mengurangi kompleksitas model, mangatasi curse dimentionality, menghilangkan redudansi, dan mengatasi noise pada data. dengan tujuan untuk menurunkan dimensi dataset, mempertahankan informasi penting, efisiensi komputasi, meningkatkan akurasi model, dan mempermudah interpretasi.
 - Membagi dataset menjadi train dan test, karna akan digunakan untuk evaluasi kinerja model, menghindari overfitting, mengukur generalisasi, menyimulasikan data baru, memvalidasi hasil model. dengan tujuan melatih model dengan data latih, menguji moel model dengan data uji, membantu proses eksperimen, meningkatkan akurasi prediksi, menjaga objektivitas.
-- stadarisasi menggunakan standardscaler digunakan untuk menormalisasi data, memaksimalkan performa model, mengurangi variabilitas fitur, mengoptimalkan perhitungan jarak.
+- Stadarisasi menggunakan standardscaler digunakan untuk menormalisasi data, memaksimalkan performa model, mengurangi variabilitas fitur, mengoptimalkan perhitungan jarak.
+- Menghapus/drop kolom Date karena algoritma machine learning tidak dapat secara langsung menangani data dengan tipe datetime. Model memerlukan data numerik atau data yang telah dikonversi menjadi fitur relevan untuk melakukan analisis.
 
 ## Modeling
 melakukan modeling dengan membandingkan 3 algoritma yaitu k-nearest neighbors, random forest, dan boosting dan memilih model algoritma yang memberikan hasil prediksi terbaik:
@@ -96,13 +103,13 @@ melakukan modeling dengan membandingkan 3 algoritma yaitu k-nearest neighbors, r
 - Random Forest, Random Forest adalah algoritma ensemble learning berbasis Decision Tree yang digunakan untuk klasifikasi dan regresi. Algoritma ini membangun banyak decision tree secara acak dan menggabungkan hasilnya untuk meningkatkan akurasi dan mengurangi overfitting, parameter yang digunakan: n_estimators=100 berfungsi untuk menentukan jumlah pohon (trees) dalam ensemble dan jumlah pohon yang akan digunakan oleh model untuk membuat prediksi akhir melalui agregasi (misalnya, voting mayoritas untuk klasifikasi atau rata-rata untuk regresi), max_depth=50 berfunsgi untuk menentukan kedalaman maksimum setiap pohon keputusan (decision tree) & membatasi kedalaman pohon untuk mengontrol kompleksitas model, random_state=123 berfungsi untuk menetapkan seed untuk generator angka acak dan memastikan hasil yang reproducible (hasil yang sama setiap kali model dijalankan dengan data yang sama), n_jobs=-1 berfungsi untuk menentukan jumlah CPU yang digunakan untuk menjalankan pekerjaan secara paralel & mengatur bagaimana pekerjaan dilakukan untuk mempercepat komputasi.
 - Boosting Algoritm, Boosting adalah teknik ensemble learning yang menggabungkan prediksi dari beberapa model lemah (weak learners) secara berurutan untuk menciptakan model yang lebih kuat (strong learner). Pada setiap langkah, model mencoba untuk memperbaiki kesalahan prediksi model sebelumnya, parameter yang digunakan: learning_rate=0.05 fungsinya untuk mengatur besar langkah pembaruan model pada setiap iterasi boosting, mengalikan kontribusi setiap model individu (weak learner) terhadap prediksi akhir, & menentukan seberapa besar dampak dari setiap model individu terhadap hasil akhir, random_state=55 berfungsi untuk Seed generator angka acak, memberikan konsistensi pada proses randomisasi dalam boosting (misalnya, pemilihan subset data atau fitur), memastikan bahwa hasil yang didapat reproducible (hasil yang sama setiap kali model dijalankan dengan parameter yang sama).
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
+**Kelbihan Kekurangan Algorithm**: 
+- kelebihan dan kekurangan dari setiap algoritma yang digunakan.
 ![Image](https://github.com/user-attachments/assets/015c1e2d-6e53-4f9a-a2ed-dfbe6c6b3125)
 
 
 ## Evaluation
-evaluasi metrik yang digunakan adalah mean squared error(MSE) digunakan untuk memberikan penalti lebih besar pada kesalahan yang besar. Saat menghitung nilai Mean Squared Error pada data train dan test, kita membaginya dengan nilai 1e2 untuk menghindari skala yang terlalu besar.
+Evaluasi metrik yang digunakan adalah mean squared error(MSE) digunakan untuk memberikan penalti lebih besar pada kesalahan yang besar. Saat menghitung nilai Mean Squared Error pada data train dan test, kita membaginya dengan nilai 1e2 untuk menghindari skala yang terlalu besar.
 
 hasil evaluasi berdasarkan metrik yang digunakan:
 
@@ -121,9 +128,41 @@ Train MSE: 35.69
 Test MSE: 41.58
 Boosting menunjukkan performa yang lebih seimbang antara data training dan testing dibandingkan dengan model lainnya. Meskipun nilai MSE-nya tidak serendah Random Forest pada test data, kesenjangan antara train dan test lebih kecil, menunjukkan bahwa Boosting mungkin lebih generalizable.
 
-Kesimpulan
+## Evaluasi dan Dampak Model terhadap Business Understanding
 
-KNN: Kurang cocok untuk dataset ini karena performa kurang baik (MSE tinggi) dan potensi overfitting.
-RF: Memiliki performa sangat baik pada training.
-Boosting: Memberikan keseimbangan terbaik antara train dan test, menjadikannya pilihan terbaik jika tujuan untuk generalisasi yang baik ke data baru.
+1. Menjawab Problem Statements:
+   
+Pernyataan Masalah 1: Bagaimana supermarket dapat meningkatkan kepuasan pelanggan dengan memahami pola pembelian dan preferensi mereka berdasarkan data historis?
+
+Evaluasi:
+- Insight dari EDA memberikan wawasan mengenai preferensi pelanggan berdasarkan kategori produk, metode pembayaran, dan jenis pelanggan (Member/Normal). Hal ini dapat digunakan untuk merancang strategi personalisasi layanan, seperti penawaran promosi pada kategori produk yang diminati (misalnya, Fashion Accessories dan Food and Beverages) atau memfokuskan layanan pelanggan pada pelanggan Member yang cenderung memiliki nilai transaksi lebih tinggi.
+- Model prediktif (Boosting) dapat membantu memahami faktor-faktor yang memengaruhi penjualan, misalnya dengan memprediksi kategori produk yang paling laris atau pola pembelian yang sering dilakukan pelanggan.
+
+Pernyataan Masalah 2: Bagaimana memprediksi penjualan di masa depan untuk membantu supermarket mengoptimalkan pengelolaan inventori dan strategi pemasaran?
+
+Evaluasi:
+- Model Boosting memiliki kinerja yang paling baik dalam hal keseimbangan antara data training dan testing (Train MSE: 35.69, Test MSE: 41.58). Dengan tingkat kesalahan yang lebih kecil dan generalisasi yang lebih baik dibandingkan model lain, Boosting dapat diandalkan untuk memprediksi penjualan di masa depan.
+- Prediksi ini dapat digunakan untuk mengatur inventori secara lebih efisien, seperti mempersiapkan stok barang pada kategori yang memiliki prediksi penjualan tinggi (misalnya Food and Beverages atau Home and Lifestyle).
+
+2. Pencapaian Goals:
+   
+- Goal 1: Memberikan wawasan berbasis data untuk merancang promosi yang lebih efektif dan personalisasi layanan.
+Berdasarkan hasil EDA, supermarket dapat memprioritaskan metode pembayaran E-wallet yang banyak digunakan oleh pelanggan atau fokus pada pelanggan Female yang memiliki daya beli lebih tinggi.
+Laporan ini menunjukkan bahwa strategi berbasis data dapat memberikan dampak langsung pada pengelolaan promosi dan personalisasi layanan.
+
+- Goal 2: Membantu perencanaan bisnis berbasis prediksi penjualan yang akurat.
+Dengan Boosting yang memiliki generalisasi lebih baik, prediksi yang dihasilkan cukup akurat untuk mendukung pengelolaan inventori dan perencanaan strategi pemasaran.
+Random Forest juga memberikan akurasi yang baik pada data training, namun risiko overfitting menjadi perhatian untuk digunakan dalam data baru.
+
+3. Dampak Solusi terhadap Bisnis:
+   
+- Peningkatan Kepuasan Pelanggan: Analisis preferensi pelanggan berdasarkan data historis memberikan supermarket peluang untuk meningkatkan pengalaman pelanggan melalui personalisasi promosi dan layanan.
+- Efisiensi Operasional: Dengan prediksi penjualan yang lebih akurat, supermarket dapat mengurangi risiko kekurangan atau kelebihan stok, sehingga meningkatkan efisiensi operasional.
+- Strategi Pemasaran yang Lebih Tepat: Informasi tentang kategori produk, metode pembayaran, dan segmentasi pelanggan memungkinkan supermarket merancang kampanye pemasaran yang lebih efektif dan terarah.
+
+Kesimpulan:
+
+Hasil evaluasi menunjukkan bahwa proyek ini telah berhasil menjawab problem statements dan mencapai goals yang diharapkan:
+- Model prediktif (Boosting) memberikan solusi untuk memprediksi penjualan dengan generalisasi yang lebih baik.
+- Analisis data historis (EDA) memberikan wawasan tentang pola pembelian pelanggan, yang dapat digunakan untuk meningkatkan kepuasan pelanggan dan efisiensi bisnis.
 
